@@ -33,7 +33,7 @@ const Config = {
         issuer: process.env.JWT_ISSUER,
         subject: process.env.JWT_SUBJECT,
         algorithm: process.env.JWT_ALGORITHM,
-        expires: Number(process.env.JWT_EXPIRES)
+        expires: Number(process.env.JWT_EXPIRES),
     },
     CLOUDINARY: {
         name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -43,5 +43,16 @@ const Config = {
     },
     sendgridKey: process.env.SENDGRID_API_KEY,
     mailSender: process.env.EMAIL_SENDER,
+    AWS: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        bucket: process.env.AWS_BUCKET,
+        region: process.env.AWS_REGION,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+    redis: {
+        host: process.env.REDIS_HOST,
+        port: Number(process.env.REDIS_PORT),
+        password: process.env.REDIS_PASSWORD,
+    },
 };
 exports.default = Config;

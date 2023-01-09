@@ -17,7 +17,7 @@ const storage = new multer_storage_cloudinary_1.CloudinaryStorage({
     cloudinary: cloudinary_1.v2,
     params: {
         folder: "Scorecard",
-        allowedFormats: ["png", "jpeg", "jpg"]
+        allowedFormats: ["png", "jpeg", "jpg", "pdf"]
     },
 });
 exports.default = storage;

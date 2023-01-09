@@ -35,12 +35,10 @@ const validate_file_upload_1 = __importDefault(require("../middleware/validate-f
 const cloud_storage_1 = __importDefault(require("../utils/cloud-storage"));
 const multer_1 = __importDefault(require("multer"));
 const uploads = (0, multer_1.default)({ storage: cloud_storage_1.default, limits: { fileSize: 1 * 1024 * 1024 } });
-// productRouter.get('/products', function(req: Request, res: Response, next: NextFunction) {
-//   res.render('index', { title: 'My Ecommerce App' });
-// });
-productRouter.post('/products', uploads.single("file"), validate_file_upload_1.default, validate_product_data_1.default, Product.addProduct);
-productRouter.get('/products', Product.getProducts);
-productRouter.route('/product/:id')
+productRouter.post("/products", uploads.single("file"), validate_file_upload_1.default, validate_product_data_1.default, Product.addProduct);
+productRouter.get("/products", Product.getProducts);
+productRouter
+    .route("/product/:id")
     .all(validate_request_data_1.validateRequestParameter)
     .get(Product.getProductById)
     .put(validate_product_data_1.default, Product.updateProductById)
