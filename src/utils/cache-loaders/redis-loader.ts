@@ -1,5 +1,5 @@
 import { Tedis } from "tedis";
-import Config from "./config";
+import Config from "../config";
 
 let tedis = new Tedis({
   host: Config.redis.host,

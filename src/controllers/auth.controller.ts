@@ -1,94 +1,142 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import userModel from "../models/users.model";
+import { v4 } from "uuid";
 import BadRequestError from "../errors/bad-request";
 import NotFoundError from "../errors/not-found";
-import { IUser } from "../../typings"
+import { IUser } from "../../typings";
 import Config from "../utils/config";
 import sendEmail from "../services/email.service";
 import emailMessage from "../utils/email-template";
-const { generateToken } = require('../utils/utils')
+import tedis from "../utils/cache-loaders/redis-loader";
+const { generateToken } = require("../utils/utils");
 const bcrypt = require("bcryptjs");
+import redisClient from "../utils/cache-loaders/redis-connect";
 
-const registerUser = expressAsyncHandler(async(req: Request, res: Response) => {
-    const { password, fullname, email } = req.body
-    const userExists = await userModel.findOne({ email: req.body.email })
+const registerUser = expressAsyncHandler(
+  async (req: Request, res: Response) => {
+    const { password, fullname, email } = req.body;
+    const temporaryUserKey = `prospective:user:${email}`;
 
-    if (userExists) {
-        throw new BadRequestError("User account exists already")
+    const [userExists, isTemporaryUser] = await Promise.all([
+      userModel.findOne({ email: req.body.email }),
+      tedis.get(temporaryUserKey),
+    ]);
+
+    if (userExists || isTemporaryUser) {
+      throw new BadRequestError("User account exists already");
     }
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    req.body.password = hashedPassword
-    delete req.body.confirm_password
+    req.body.password = hashedPassword;
+    delete req.body.confirm_password;
 
-    const url = `${Config.serverPort}/login`
-    const emailData = { 
-        content: emailMessage(fullname,url),
-        to: email, 
-        subject : "Techy_Jo Registration Confirmation"
-    }
+    const reference = v4();
 
-    await sendEmail(emailData)
+    await tedis.set(reference, JSON.stringify(req.body));
+    await tedis.expire(reference, 60 * 100);
+    await tedis.set(temporaryUserKey, "1");
+    await tedis.expire(temporaryUserKey, 60 * 100);
 
-    const user: IUser = await userModel.create(req.body) as IUser
-    delete user.password
-    
-    res.status(201).json({ 
-        message: "User created successfully", 
-        data: { user }, 
-        status: true 
-    })
-})
+    const url = `http://localhost:3003/verify-email?reference=${reference}`;
+    const emailData = {
+      content: emailMessage(fullname, url),
+      to: email,
+      subject: "Techy_Jo Registration Confirmation",
+    };
 
-const handleLogin = expressAsyncHandler(async(req: Request, res: Response) => {
-    const { email, password } = req.body
-    const user = await userModel.findOne({ email }) as IUser
+    await sendEmail(emailData);
 
-    if (!user) {
-        throw new NotFoundError("User account not found")
-    }
+    res.status(201).json({
+      message: "Email verification link sent",
+      data: {},
+      status: true,
+    });
+  }
+);
 
-    const isCorrectPassword = await bcrypt.compare(password, user.password)
+const verifyEmail = expressAsyncHandler(async (req: Request, res: Response) => {
+  const reference = req.query.reference as string;
 
-    if (!isCorrectPassword) {
-        throw new BadRequestError("Invalid login credentials")
-    }
+  if (!reference) {
+    throw new BadRequestError("Invalid Reference");
+  }
 
-    const tokenData: Record<string, any> = {
-        id: user.id,
-        email,
-        fullname: user.fullname
-    }
+  const isReference = (await tedis.get(reference)) as string;
 
-    const token = generateToken(tokenData) as string;
-    res.cookie("Token", token)
-    res.cookie("Username", user.fullname)
-    res.cookie("UserId", user.id)
+  if (!isReference) {
+    throw new BadRequestError("Link has expired");
+  }
+
+  const userData = JSON.parse(isReference);
+  const temporaryUserKey = `prospective:user:${userData.email}`;
+
+  const user: IUser = (await userModel.create(userData)) as IUser;
+
+  await tedis.del(temporaryUserKey);
+  await tedis.del(reference as string);
+
+  res.status(200).json({
+    message: "Your account has been successfully verified",
+    data: {},
+    status: true,
+  });
+});
+
+const handleLogin = expressAsyncHandler(async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const user = (await userModel.findOne({ email })) as IUser;
+
+  if (!user) {
+    throw new NotFoundError("User account not found");
+  }
+
+  const isCorrectPassword = await bcrypt.compare(password, user.password);
+
+  if (!isCorrectPassword) {
+    throw new BadRequestError("Invalid login credentials");
+  }
+
+  const tokenData: Record<string, any> = {
+    id: user.id,
+    email,
+    fullname: user.fullname,
+  };
+
+  const token = generateToken(tokenData) as string;
+
+  const blacklistedTokenKey = `token:blacklist:${email}`;
+  await redisClient.del(blacklistedTokenKey);
+
+  res.status(200).json({
+    message: "User login successful",
+    data: {
+      token,
+    },
+    status: true,
+  });
+});
+
+const handleLogout = expressAsyncHandler(
+  async (req: Request, res: Response) => {
+    const { email } = res.locals.payload;
+    console.log(email);
+
+    const blacklistedTokenKey = `token:blacklist:${email}`;
+    redisClient.set(blacklistedTokenKey, "yes");
 
     res.status(200).json({
-        message: "User login successful",
-        data: {
-            token
-        },
-        status: true
-    })
-})
-
-const handleLogout = expressAsyncHandler(async(req: Request, res: Response) => {
-    res.cookie("Token", "")
-    res.cookie("Username", "")
-    res.cookie("UserId", "")
-
-    res.status(200).json({
-        message: "User logout successful",
-        data: { },
-        status: true
-    })
-})
+      message: "User logout successful",
+      data: {},
+      status: true,
+    });
+  }
+);
 
 module.exports = {
-    registerUser,
-    handleLogin,
-    handleLogout
-}
+  registerUser,
+  verifyEmail,
+  handleLogin,
+  handleLogout,
+};

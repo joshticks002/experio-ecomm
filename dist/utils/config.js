@@ -52,6 +52,7 @@ const Config = {
     redis: {
         host: process.env.REDIS_HOST,
         port: Number(process.env.REDIS_PORT),
+        localPort: Number(process.env.REDIS_LOCAL_PORT),
         password: process.env.REDIS_PASSWORD,
     },
 };

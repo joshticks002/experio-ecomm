@@ -19,7 +19,7 @@ class UploadFile {
         this.saveToMemory = (0, multer_1.default)({
             storage: multer_1.default.memoryStorage(),
             limits: {
-                fileSize: 1 * 1024 * 1024,
+                fileSize: 2 * 1024 * 1024,
             },
         });
         //Save the file to disk ( the path is that which is provided)

@@ -1,49 +1,62 @@
-[{
-        "id": 1,
-        "name": "Adidas Spike Shoe",
-        "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c3Bpa2UlMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-        "brand": "Adidas",
-        "category": "Shoes",
-        "description": "Comfortable wear",
-        "price": "N18000",
-        "countInStock": 5,
-        "rating": 5,
-        "numReviews": 200
-    },
-    {
-        "id": 2,
-        "name": "Zara gown",
-        "image": "https://images.unsplash.com/photo-1622745473872-9ab4f498d88a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZlbWFsZSUyMGdvd25zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-        "brand": "Zara",
-        "category": "Wears",
-        "description": "Comfortable wear",
-        "price": "N6000",
-        "countInStock": 12,
-        "rating": 5,
-        "numReviews": 300
-    },
-    {
-        "id": 3,
-        "name": "Zara suit",
-        "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3VpdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-        "brand": "Zara",
-        "category": "Wears",
-        "description": "Comfortable wear",
-        "price": "N35000",
-        "countInStock": 4,
-        "rating": 4.8,
-        "numReviews": 98
-    },
-    {
-        "id": 4,
-        "name": "Jumper wear",
-        "brand": "Adidas",
-        "category": "wears",
-        "description": "Its a nice wear",
-        "price": "N4500",
-        "countInStock": "18",
-        "rating": "4.5",
-        "numReviews": "8",
-        "image": "https://res.cloudinary.com/dvyhb21ai/image/upload/v1668244410/Scorecard/tmk2pp4hlrdw770azudm.jpg"
-    }
+[
+  {
+    "id": 1,
+    "name": "Adidas Spike Shoe",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c3Bpa2UlMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+    "brand": "Adidas",
+    "category": "Shoes",
+    "description": "Comfortable wear",
+    "price": "N18000",
+    "countInStock": 5,
+    "rating": 5,
+    "numReviews": 200
+  },
+  {
+    "id": 2,
+    "name": "Zara gown",
+    "image": "https://images.unsplash.com/photo-1622745473872-9ab4f498d88a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZlbWFsZSUyMGdvd25zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "brand": "Zara",
+    "category": "Wears",
+    "description": "Comfortable wear",
+    "price": "N6000",
+    "countInStock": 12,
+    "rating": 5,
+    "numReviews": 300
+  },
+  {
+    "id": 3,
+    "name": "Zara suit",
+    "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3VpdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
+    "brand": "Zara",
+    "category": "Wears",
+    "description": "Comfortable wear",
+    "price": "N35000",
+    "countInStock": 4,
+    "rating": 4.8,
+    "numReviews": 98
+  },
+  {
+    "id": 4,
+    "name": "Jumper wear",
+    "brand": "Adidas",
+    "category": "wears",
+    "description": "Its a nice wear",
+    "price": "N4500",
+    "countInStock": "18",
+    "rating": "4.5",
+    "numReviews": "8",
+    "image": "https://res.cloudinary.com/dvyhb21ai/image/upload/v1668244410/Scorecard/tmk2pp4hlrdw770azudm.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Zara gown",
+    "brand": "Zara",
+    "category": "Wears",
+    "description": "Comfortable wear",
+    "price": "N6000",
+    "countInStock": "12",
+    "rating": "5",
+    "numReviews": "300",
+    "imageUrl": "https://josh-node-app.s3.amazonaws.com/IMG_3489.jpg"
+  }
 ]

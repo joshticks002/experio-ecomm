@@ -31,11 +31,10 @@ const productRouter = express_1.default.Router();
 const Product = __importStar(require("../controllers/products.controller"));
 const validate_product_data_1 = __importDefault(require("../middleware/validate-product-data"));
 const validate_request_data_1 = require("../middleware/validate-request-data");
+const move_file_1 = __importDefault(require("../middleware/move-file"));
+const upload_file_1 = __importDefault(require("../middleware/upload-file"));
 const validate_file_upload_1 = __importDefault(require("../middleware/validate-file-upload"));
-const cloud_storage_1 = __importDefault(require("../utils/cloud-storage"));
-const multer_1 = __importDefault(require("multer"));
-const uploads = (0, multer_1.default)({ storage: cloud_storage_1.default, limits: { fileSize: 1 * 1024 * 1024 } });
-productRouter.post("/products", uploads.single("file"), validate_file_upload_1.default, validate_product_data_1.default, Product.addProduct);
+productRouter.post("/products", upload_file_1.default.single("file"), validate_product_data_1.default, move_file_1.default.awsMove, validate_file_upload_1.default, Product.addProduct);
 productRouter.get("/products", Product.getProducts);
 productRouter
     .route("/product/:id")

@@ -1,9 +1,5 @@
-const emailMessage = (
-    username: string,
-    url  : string
-) => {
-    const message =
-        `<!DOCTYPE html >
+const emailMessage = (username: string, url: string) => {
+  const message = `<!DOCTYPE html >
         <html>
 
         <head>
@@ -140,8 +136,8 @@ const emailMessage = (
                 <!-- start copy -->
                 <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                    <p style="margin: 0; text-align: center;">We are happy to have you with us! <br>
-        Your account is active for services from us!</p>
+                    <p style="margin: 0; text-align: center;">We are happy to have you with us <br>
+        Use the link below to verify and activate your account with us!</p>
                     </td>
                 </tr>
                 <!-- end copy -->
@@ -155,7 +151,7 @@ const emailMessage = (
                             <table border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td align="center" bgcolor="#134A70" style="border-radius: 6px;">
-                                <a href=${url} target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: bold;">Login</a>
+                                <a href=${url} target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: bold;">Verify Email</a>
                                 </td>
                             </tr>
                             </table>
@@ -199,8 +195,8 @@ const emailMessage = (
         </body>
 
         </html>
-    `
-    return message
-}
+    `;
+  return message;
+};
 
-export default emailMessage
+export default emailMessage;

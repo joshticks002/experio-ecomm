@@ -65,6 +65,7 @@ class MoveFile {
                 req.body.todo_avatar = await fileService.uploadToAWS(originalname, buffer);
                 if (req.body.todo_avatar.$metadata.httpStatusCode === 200) {
                     req.body.imageUrl = `https://${config_1.default.AWS.bucket}.s3.amazonaws.com/${originalname}`;
+                    delete req.body.todo_avatar;
                     return next();
                 }
                 throw new bad_request_1.default("An Error occured while uploading");
@@ -89,6 +90,7 @@ class MoveFile {
                 req.body.todo_avatar = await fileService.uploadToAWS(originalname, buffer);
                 if (req.body.todo_avatar.$metadata.httpStatusCode === 200) {
                     req.body.imageUrl = `https://${config_1.default.AWS.bucket}.s3.amazonaws.com/${originalname}`;
+                    delete req.body.todo_avatar;
                     return next();
                 }
                 throw new bad_request_1.default("An Error occured while uploading");

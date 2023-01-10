@@ -8,7 +8,6 @@ const express_async_handler_1 = __importDefault(require("express-async-handler")
 const validateProductData = (0, express_async_handler_1.default)(async (req, res, next) => {
     const schema = joi_1.default.object({
         name: joi_1.default.string().required(),
-        image: joi_1.default.string().required(),
         brand: joi_1.default.string().required(),
         category: joi_1.default.string().required(),
         description: joi_1.default.string().required(),

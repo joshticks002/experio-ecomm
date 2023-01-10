@@ -10,9 +10,9 @@ import validateFileUpload from "../middleware/validate-file-upload";
 productRouter.post(
   "/products",
   multerMemory.single("file"),
+  validateProductData,
   MoveFile.awsMove,
   validateFileUpload,
-  validateProductData,
   Product.addProduct
 );
 productRouter.get("/products", Product.getProducts);

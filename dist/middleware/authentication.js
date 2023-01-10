@@ -28,35 +28,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = __importStar(require("jsonwebtoken"));
 const config_1 = __importDefault(require("../utils/config"));
+const bad_request_1 = __importDefault(require("../errors/bad-request"));
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const unauthenticated_1 = __importDefault(require("../errors/unauthenticated"));
-const { JWT: { secret, subject, issuer } } = config_1.default;
+const redis_connect_1 = __importDefault(require("../utils/cache-loaders/redis-connect"));
+const { JWT: { secret, subject, issuer }, } = config_1.default;
 const validateToken = (0, express_async_handler_1.default)(async (req, res, next) => {
     let token = req.cookies.Token || null;
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    if (req.headers.authorization &&
+        req.headers.authorization.startsWith("Bearer")) {
         try {
             token = req.headers.authorization.split(" ")[1];
             const payload = jwt.verify(token, secret, {
                 issuer: issuer,
-                subject: subject
+                subject: subject,
             });
-            res.locals.payload = payload;
-            res.locals.token = token;
-            next();
-        }
-        catch (err) {
-            throw new unauthenticated_1.default(err.message);
-        }
-    }
-    else if (token) {
-        try {
-            const payload = jwt.verify(token, secret, {
-                issuer: issuer,
-                subject: subject
+            const blacklistedTokenKey = `token:blacklist:${payload.email}`;
+            redis_connect_1.default.get(blacklistedTokenKey, (error, verifier) => {
+                if (error)
+                    console.error(error);
+                if (verifier) {
+                    return next(new bad_request_1.default("Please, login again. Session Expired"));
+                }
+                else {
+                    res.locals.payload = payload;
+                    res.locals.token = token;
+                    next();
+                }
             });
-            res.locals.payload = payload;
-            res.locals.token = token;
-            next();
         }
         catch (err) {
             throw new unauthenticated_1.default(err.message);

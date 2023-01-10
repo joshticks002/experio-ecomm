@@ -1,28 +1,38 @@
-[{
-        "id": 1,
-        "fullname": "Kosi Smith",
-        "email": "kosi@example.com",
-        "gender": "female",
-        "phone": "+2347085647535",
-        "password": "$2a$10$0vMkiRPKPCXlbEfLg8iOp.Lzt22wPbp0BN/LMIqhceh5k730OocNG",
-        "address": "1, rantech stop"
-    },
-    {
-        "id": 2,
-        "fullname": "John Doe",
-        "email": "johnny133@example.com",
-        "gender": "female",
-        "phone": "+2347085647535",
-        "password": "$2a$10$3scwc157luueexk.XiCz1.qSGMASEeo/zMuggiYBuQQxWkrQtmVxS",
-        "address": "1, rantech stop"
-    },
-    {
-        "id": 3,
-        "fullname": "Adeyemo Joshua",
-        "email": "jadeyemo195@gmail.com",
-        "password": "$2a$10$UM4HPqx7G7yyBJxwnJESrO./Spa69vjU5DDlE.orooIYA2PbGb8nq",
-        "gender": "male",
-        "phone": "+2348169833589",
-        "address": "No 2 olaosebikan close, second bowen gate"
-    }
+[
+  {
+    "id": 1,
+    "fullname": "Kosi Smith",
+    "email": "kosi@example.com",
+    "gender": "female",
+    "phone": "+2347085647535",
+    "password": "$2a$10$0vMkiRPKPCXlbEfLg8iOp.Lzt22wPbp0BN/LMIqhceh5k730OocNG",
+    "address": "1, rantech stop"
+  },
+  {
+    "id": 2,
+    "fullname": "John Doe",
+    "email": "johnny133@example.com",
+    "gender": "female",
+    "phone": "+2347085647535",
+    "password": "$2a$10$3scwc157luueexk.XiCz1.qSGMASEeo/zMuggiYBuQQxWkrQtmVxS",
+    "address": "1, rantech stop"
+  },
+  {
+    "id": 3,
+    "fullname": "Adeyemo Joshua",
+    "email": "jadeyemo195@gmail.com",
+    "password": "$2a$10$UM4HPqx7G7yyBJxwnJESrO./Spa69vjU5DDlE.orooIYA2PbGb8nq",
+    "gender": "male",
+    "phone": "+2348169833589",
+    "address": "No 2 olaosebikan close, second bowen gate"
+  },
+  {
+    "id": 4,
+    "fullname": "Adeyemo Joshua",
+    "email": "jadeyemo002@gmail.com",
+    "password": "$2a$10$sUd6ttcl2Gqrs9VXEOZSieCCizSlMQp.VNQ2Ufz7WTCFn8yB0A1km",
+    "gender": "male",
+    "phone": "+2348169833589",
+    "address": "No 2 olaosebikan close, second bowen gate"
+  }
 ]

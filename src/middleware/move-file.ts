@@ -49,6 +49,7 @@ class MoveFile {
 
         if (req.body.todo_avatar.$metadata.httpStatusCode === 200) {
           req.body.imageUrl = `https://${Config.AWS.bucket}.s3.amazonaws.com/${originalname}`;
+          delete req.body.todo_avatar;
           return next();
         }
         throw new BadRequestError("An Error occured while uploading");
@@ -85,6 +86,7 @@ class MoveFile {
 
         if (req.body.todo_avatar.$metadata.httpStatusCode === 200) {
           req.body.imageUrl = `https://${Config.AWS.bucket}.s3.amazonaws.com/${originalname}`;
+          delete req.body.todo_avatar;
           return next();
         }
         throw new BadRequestError("An Error occured while uploading");
