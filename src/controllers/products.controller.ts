@@ -23,29 +23,25 @@ export const addProduct = expressAsyncHandler(
 
 export const getProducts = expressAsyncHandler(
   async (req: Request, res: Response) => {
+    let productsData: Promise<any> | IProducts[];
+
     redisClient.get("products", async (error: any, products: string) => {
       if (error) console.error(error);
 
       if (products != null) {
-        res.status(200).json({
-          message: "All products retrieved",
-          data: {
-            products: JSON.parse(products),
-          },
-          status: true,
-        });
+        productsData = JSON.parse(products);
       } else {
-        const productsData = (await productModel.find()) as IProducts[];
+        productsData = (await productModel.find()) as IProducts[];
         redisClient.setex("products", 3600, JSON.stringify(productsData));
-
-        res.status(200).json({
-          message: "All products retrieved",
-          data: {
-            products: productsData,
-          },
-          status: true,
-        });
       }
+
+      res.status(200).json({
+        message: "All products retrieved",
+        data: {
+          products: productsData,
+        },
+        status: true,
+      });
     });
   }
 );
@@ -85,6 +81,8 @@ export const updateProductById = expressAsyncHandler(
       { id, ...req.body }
     )) as IProducts;
 
+    redisClient.del("products");
+
     res.status(200).json({
       message: `Product with id ${id} updated successfully`,
       data: {
@@ -105,6 +103,7 @@ export const deleteProductById = expressAsyncHandler(
     }
 
     await productModel.remove({ id });
+    redisClient.del("products");
 
     res.status(200).json({
       message: `Product with id ${id} deleted successfully`,

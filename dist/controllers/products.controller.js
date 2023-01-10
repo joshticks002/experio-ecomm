@@ -21,29 +21,24 @@ exports.addProduct = (0, express_async_handler_1.default)(async (req, res) => {
     });
 });
 exports.getProducts = (0, express_async_handler_1.default)(async (req, res) => {
+    let productsData;
     redis_connect_1.default.get("products", async (error, products) => {
         if (error)
             console.error(error);
         if (products != null) {
-            res.status(200).json({
-                message: "All products retrieved",
-                data: {
-                    products: JSON.parse(products),
-                },
-                status: true,
-            });
+            productsData = JSON.parse(products);
         }
         else {
-            const productsData = (await products_model_1.default.find());
+            productsData = (await products_model_1.default.find());
             redis_connect_1.default.setex("products", 3600, JSON.stringify(productsData));
-            res.status(200).json({
-                message: "All products retrieved",
-                data: {
-                    products: productsData,
-                },
-                status: true,
-            });
         }
+        res.status(200).json({
+            message: "All products retrieved",
+            data: {
+                products: productsData,
+            },
+            status: true,
+        });
     });
 });
 exports.getProductById = (0, express_async_handler_1.default)(async (req, res) => {
@@ -69,6 +64,7 @@ exports.updateProductById = (0, express_async_handler_1.default)(async (req, res
     }
     req.body.price = `N${req.body.price}`;
     const updatedProduct = (await products_model_1.default.update({ id }, { id, ...req.body }));
+    redis_connect_1.default.del("products");
     res.status(200).json({
         message: `Product with id ${id} updated successfully`,
         data: {
@@ -84,6 +80,7 @@ exports.deleteProductById = (0, express_async_handler_1.default)(async (req, res
         throw new bad_request_1.default("Product not found");
     }
     await products_model_1.default.remove({ id });
+    redis_connect_1.default.del("products");
     res.status(200).json({
         message: `Product with id ${id} deleted successfully`,
         data: {},
