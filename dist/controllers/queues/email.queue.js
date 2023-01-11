@@ -14,7 +14,7 @@ const emailQueue = new bull_1.default("email", {
     },
 });
 emailQueue.process(email_process_1.default);
-emailQueue.on("completed", (job, result) => {
+emailQueue.on("completed", (job) => {
     console.log(`Job completed`);
 });
 const sendEmailJob = (data) => {

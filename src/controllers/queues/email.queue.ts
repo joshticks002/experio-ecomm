@@ -11,7 +11,7 @@ const emailQueue = new Bull("email", {
 });
 
 emailQueue.process(emailProcess);
-emailQueue.on("completed", (job: Job, result: any) => {
+emailQueue.on("completed", (job: Job) => {
   console.log(`Job completed`);
 });
 
