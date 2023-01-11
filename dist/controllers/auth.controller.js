@@ -8,13 +8,13 @@ const users_model_1 = __importDefault(require("../models/users.model"));
 const uuid_1 = require("uuid");
 const bad_request_1 = __importDefault(require("../errors/bad-request"));
 const not_found_1 = __importDefault(require("../errors/not-found"));
-const email_service_1 = __importDefault(require("../services/email.service"));
 const email_verification_1 = __importDefault(require("../utils/template/email-verification"));
 const forgot_password_template_1 = __importDefault(require("../utils/template/forgot-password-template"));
 const redis_loader_1 = __importDefault(require("../utils/cache-loaders/redis-loader"));
 const { generateToken } = require("../utils/utils");
 const bcrypt = require("bcryptjs");
 const redis_connect_1 = __importDefault(require("../utils/cache-loaders/redis-connect"));
+const email_queue_1 = __importDefault(require("./queues/email.queue"));
 const registerUser = (0, express_async_handler_1.default)(async (req, res) => {
     const { password, fullname, email } = req.body;
     const temporaryUserKey = `prospective:user:${email}`;
@@ -40,7 +40,7 @@ const registerUser = (0, express_async_handler_1.default)(async (req, res) => {
         to: email,
         subject: "Techy_Jo Registration Confirmation",
     };
-    await (0, email_service_1.default)(emailData);
+    (0, email_queue_1.default)(emailData);
     res.status(201).json({
         message: "Email verification link sent",
         data: {},
@@ -108,7 +108,7 @@ const forgotPassword = (0, express_async_handler_1.default)(async (req, res) => 
         to: email,
         subject: "Techy_Jo Password Reset",
     };
-    await (0, email_service_1.default)(emailData);
+    (0, email_queue_1.default)(emailData);
     res.status(200).json({
         message: "Forgot password link sent",
         data: {},

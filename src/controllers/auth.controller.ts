@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import userModel from "../models/users.model";
 import { v4 } from "uuid";
@@ -6,13 +6,13 @@ import BadRequestError from "../errors/bad-request";
 import NotFoundError from "../errors/not-found";
 import { IUser } from "../../typings";
 import Config from "../utils/config";
-import sendEmail from "../services/email.service";
 import emailMessage from "../utils/template/email-verification";
 import forgotPasswordMessage from "../utils/template/forgot-password-template";
 import tedis from "../utils/cache-loaders/redis-loader";
 const { generateToken } = require("../utils/utils");
 const bcrypt = require("bcryptjs");
 import redisClient from "../utils/cache-loaders/redis-connect";
+import sendEmailJob from "./queues/email.queue";
 
 const registerUser = expressAsyncHandler(
   async (req: Request, res: Response) => {
@@ -47,7 +47,7 @@ const registerUser = expressAsyncHandler(
       subject: "Techy_Jo Registration Confirmation",
     };
 
-    await sendEmail(emailData);
+    sendEmailJob(emailData);
 
     res.status(201).json({
       message: "Email verification link sent",
@@ -141,7 +141,7 @@ const forgotPassword = expressAsyncHandler(
       subject: "Techy_Jo Password Reset",
     };
 
-    await sendEmail(emailData);
+    sendEmailJob(emailData);
 
     res.status(200).json({
       message: "Forgot password link sent",

@@ -1,74 +1,82 @@
-[
-  {
-    "id": 1,
-    "fullname": "Kosi Smith",
-    "email": "kosi@example.com",
-    "gender": "female",
-    "phone": "+2347085647535",
-    "password": "$2a$10$0vMkiRPKPCXlbEfLg8iOp.Lzt22wPbp0BN/LMIqhceh5k730OocNG",
-    "address": "1, rantech stop"
-  },
-  {
-    "id": 2,
-    "fullname": "John Doe",
-    "email": "johnny133@example.com",
-    "gender": "female",
-    "phone": "+2347085647535",
-    "password": "$2a$10$3scwc157luueexk.XiCz1.qSGMASEeo/zMuggiYBuQQxWkrQtmVxS",
-    "address": "1, rantech stop"
-  },
-  {
-    "id": 3,
-    "fullname": "John Smith",
-    "email": "examplepull@gmail.com",
-    "password": "$2a$10$UM4HPqx7G7yyBJxwnJESrO./Spa69vjU5DDlE.orooIYA2PbGb8nq",
-    "gender": "male",
-    "phone": "+2348169454678",
-    "address": "No 2 olaosebikan close, second bowen gate"
-  },
-  {
-    "id": 4,
-    "fullname": "Baciu Leaf",
-    "email": "jafuihuihui@gmail.com",
-    "password": "$2a$10$sUd6ttcl2Gqrs9VXEOZSieCCizSlMQp.VNQ2Ufz7WTCFn8yB0A1km",
-    "gender": "male",
-    "phone": "+2348082343589",
-    "address": "No 2 olaosebikan close, second bowen gate"
-  },
-  {
-    "id": 5,
-    "fullname": "Lurke Joshua",
-    "email": "jadeyemo0032@gmail.com",
-    "password": "$2a$10$JasrMQJAmH.Lr4wz/8TRS.tftijvKYFRBxOTffgD2ai5n4NgCSEUe",
-    "gender": "male",
-    "phone": "+2348169833589",
-    "address": "No 2 olaosebikan close, second bowen gate"
-  },
-  {
-    "id": 6,
-    "fullname": "Adeyemo Joel",
-    "email": "jasygumo002@gmail.com",
-    "password": "$2a$10$p0Hs8DLn6leDROpgvpf4pORcyX8XE00B2aRlq1Pc2kZDd8svd.y8q",
-    "gender": "male",
-    "phone": "+2348023415643",
-    "address": "No 2 olaosebikan close, second bowen gate"
-  },
-  {
-    "id": 7,
-    "fullname": "Bullion Mark",
-    "email": "bullion.mark@gmail.com",
-    "password": "$2a$10$qlPJIH4BkHyBi/UFlzLOr.Gz75gQ1eOJpNMpPhyP4R9e0/70aERPu",
-    "gender": "male",
-    "phone": "+2347062345623",
-    "address": "No 2 olaosebikan close, second bowen gate"
-  },
-  {
-    "id": 8,
-    "fullname": "Carter Luke",
-    "email": "jadeyemo002@gmail.com",
-    "password": "$2a$10$FReITON91qdrOkjLNDflSe7c9BPOPmKFzfLgb403o1zpElX3VSKf.",
-    "gender": "male",
-    "phone": "+2348032896453",
-    "address": "Sangotedo, Lagos"
-  }
+[{
+        "id": 1,
+        "fullname": "Kosi Smith",
+        "email": "kosi@example.com",
+        "gender": "female",
+        "phone": "+2347085647535",
+        "password": "$2a$10$0vMkiRPKPCXlbEfLg8iOp.Lzt22wPbp0BN/LMIqhceh5k730OocNG",
+        "address": "1, rantech stop"
+    },
+    {
+        "id": 2,
+        "fullname": "John Doe",
+        "email": "johnny133@example.com",
+        "gender": "female",
+        "phone": "+2347085647535",
+        "password": "$2a$10$3scwc157luueexk.XiCz1.qSGMASEeo/zMuggiYBuQQxWkrQtmVxS",
+        "address": "1, rantech stop"
+    },
+    {
+        "id": 3,
+        "fullname": "John Smith",
+        "email": "examplepull@gmail.com",
+        "password": "$2a$10$UM4HPqx7G7yyBJxwnJESrO./Spa69vjU5DDlE.orooIYA2PbGb8nq",
+        "gender": "male",
+        "phone": "+2348169454678",
+        "address": "No 2 olaosebikan close, second bowen gate"
+    },
+    {
+        "id": 4,
+        "fullname": "Baciu Leaf",
+        "email": "jafuihuihui@gmail.com",
+        "password": "$2a$10$sUd6ttcl2Gqrs9VXEOZSieCCizSlMQp.VNQ2Ufz7WTCFn8yB0A1km",
+        "gender": "male",
+        "phone": "+2348082343589",
+        "address": "No 2 olaosebikan close, second bowen gate"
+    },
+    {
+        "id": 5,
+        "fullname": "Lurke Joshua",
+        "email": "jadeyemo0032@gmail.com",
+        "password": "$2a$10$JasrMQJAmH.Lr4wz/8TRS.tftijvKYFRBxOTffgD2ai5n4NgCSEUe",
+        "gender": "male",
+        "phone": "+2348169833589",
+        "address": "No 2 olaosebikan close, second bowen gate"
+    },
+    {
+        "id": 6,
+        "fullname": "Adeyemo Joel",
+        "email": "jasygumo002@gmail.com",
+        "password": "$2a$10$p0Hs8DLn6leDROpgvpf4pORcyX8XE00B2aRlq1Pc2kZDd8svd.y8q",
+        "gender": "male",
+        "phone": "+2348023415643",
+        "address": "No 2 olaosebikan close, second bowen gate"
+    },
+    {
+        "id": 7,
+        "fullname": "Bullion Mark",
+        "email": "bullion.mark@gmail.com",
+        "password": "$2a$10$qlPJIH4BkHyBi/UFlzLOr.Gz75gQ1eOJpNMpPhyP4R9e0/70aERPu",
+        "gender": "male",
+        "phone": "+2347062345623",
+        "address": "No 2 olaosebikan close, second bowen gate"
+    },
+    {
+        "id": 8,
+        "fullname": "Carter Luke",
+        "email": "carter.luke@gmail.com",
+        "password": "$2a$10$FReITON91qdrOkjLNDflSe7c9BPOPmKFzfLgb403o1zpElX3VSKf.",
+        "gender": "male",
+        "phone": "+2348032896453",
+        "address": "Sangotedo, Lagos"
+    },
+    {
+        "id": 9,
+        "fullname": "Becky Reeve",
+        "email": "beckreeveho@gmail.com",
+        "password": "$2a$10$aUgl9p9GUEjnHzwUsei57OISj6BxBp3ucigXCi0mievECEAPC0ZVW",
+        "gender": "female",
+        "phone": "+2348032896453",
+        "address": "Sangotedo, Lagos"
+    }
 ]
