@@ -19,18 +19,36 @@
   },
   {
     "id": 3,
-    "fullname": "Adeyemo Joshua",
-    "email": "jadeyemo195@gmail.com",
+    "fullname": "John Smith",
+    "email": "examplepull@gmail.com",
     "password": "$2a$10$UM4HPqx7G7yyBJxwnJESrO./Spa69vjU5DDlE.orooIYA2PbGb8nq",
+    "gender": "male",
+    "phone": "+2348169454678",
+    "address": "No 2 olaosebikan close, second bowen gate"
+  },
+  {
+    "id": 4,
+    "fullname": "Baciu Leaf",
+    "email": "jafuihuihui@gmail.com",
+    "password": "$2a$10$sUd6ttcl2Gqrs9VXEOZSieCCizSlMQp.VNQ2Ufz7WTCFn8yB0A1km",
+    "gender": "male",
+    "phone": "+2348082343589",
+    "address": "No 2 olaosebikan close, second bowen gate"
+  },
+  {
+    "id": 5,
+    "fullname": "Adeyemo Joshua",
+    "email": "jadeyemo0032@gmail.com",
+    "password": "$2a$10$JasrMQJAmH.Lr4wz/8TRS.tftijvKYFRBxOTffgD2ai5n4NgCSEUe",
     "gender": "male",
     "phone": "+2348169833589",
     "address": "No 2 olaosebikan close, second bowen gate"
   },
   {
-    "id": 4,
-    "fullname": "Adeyemo Joshua",
+    "id": 6,
+    "fullname": "Adeyemo Joel",
     "email": "jadeyemo002@gmail.com",
-    "password": "$2a$10$sUd6ttcl2Gqrs9VXEOZSieCCizSlMQp.VNQ2Ufz7WTCFn8yB0A1km",
+    "password": "$2a$10$p0Hs8DLn6leDROpgvpf4pORcyX8XE00B2aRlq1Pc2kZDd8svd.y8q",
     "gender": "male",
     "phone": "+2348169833589",
     "address": "No 2 olaosebikan close, second bowen gate"

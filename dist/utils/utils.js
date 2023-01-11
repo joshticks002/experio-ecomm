@@ -29,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const jwt = __importStar(require("jsonwebtoken"));
 const config_1 = __importDefault(require("./config"));
-const { JWT: { secret, subject, issuer, expires } } = config_1.default;
+const { JWT: { secret, subject, issuer, expires }, } = config_1.default;
 const writeToFile = (dir, content) => {
     const writer = fs_1.default.createWriteStream(dir);
     writer.write(JSON.stringify(content, null, 2));
@@ -45,17 +45,17 @@ const generateToken = (data) => {
     const token = jwt.sign({
         id,
         email,
-        fullname
+        fullname,
     }, secret, {
         issuer: issuer,
         expiresIn: expires,
         algorithm: "HS512",
-        subject: subject
+        subject: subject,
     });
     return token;
 };
 module.exports = {
     writeToFile,
     generateId,
-    generateToken
+    generateToken,
 };

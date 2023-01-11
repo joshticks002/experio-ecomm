@@ -15,7 +15,7 @@ class UploadFile {
   saveToMemory = multer({
     storage: multer.memoryStorage(),
     limits: {
-      fileSize: 2 * 1024 * 1024,
+      fileSize: 0.5 * 1024 * 1024,
     },
   });
 

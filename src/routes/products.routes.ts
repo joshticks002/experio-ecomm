@@ -11,13 +11,13 @@ productRouter.post(
   "/products",
   multerMemory.single("file"),
   validateProductData,
-  MoveFile.awsMove,
+  MoveFile.awsMoveProfilePicture,
   validateFileUpload,
   Product.addProduct
 );
 productRouter.get("/products", Product.getProducts);
 productRouter
-  .route("/product/:id")
+  .route("/products/:id")
   .all(validateRequestParameter)
   .get(Product.getProductById)
   .put(validateProductData, Product.updateProductById)

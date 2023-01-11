@@ -7,7 +7,7 @@ import NotFoundError from "../errors/not-found";
 import { IUser } from "../../typings";
 import Config from "../utils/config";
 import sendEmail from "../services/email.service";
-import emailMessage from "../utils/email-template";
+import emailMessage from "../utils/template/email-verification";
 import tedis from "../utils/cache-loaders/redis-loader";
 const { generateToken } = require("../utils/utils");
 const bcrypt = require("bcryptjs");

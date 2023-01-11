@@ -34,10 +34,10 @@ const validate_request_data_1 = require("../middleware/validate-request-data");
 const move_file_1 = __importDefault(require("../middleware/move-file"));
 const upload_file_1 = __importDefault(require("../middleware/upload-file"));
 const validate_file_upload_1 = __importDefault(require("../middleware/validate-file-upload"));
-productRouter.post("/products", upload_file_1.default.single("file"), validate_product_data_1.default, move_file_1.default.awsMove, validate_file_upload_1.default, Product.addProduct);
+productRouter.post("/products", upload_file_1.default.single("file"), validate_product_data_1.default, move_file_1.default.awsMoveProfilePicture, validate_file_upload_1.default, Product.addProduct);
 productRouter.get("/products", Product.getProducts);
 productRouter
-    .route("/product/:id")
+    .route("/products/:id")
     .all(validate_request_data_1.validateRequestParameter)
     .get(Product.getProductById)
     .put(validate_product_data_1.default, Product.updateProductById)

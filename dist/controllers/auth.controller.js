@@ -9,7 +9,7 @@ const uuid_1 = require("uuid");
 const bad_request_1 = __importDefault(require("../errors/bad-request"));
 const not_found_1 = __importDefault(require("../errors/not-found"));
 const email_service_1 = __importDefault(require("../services/email.service"));
-const email_template_1 = __importDefault(require("../utils/email-template"));
+const email_verification_1 = __importDefault(require("../utils/template/email-verification"));
 const redis_loader_1 = __importDefault(require("../utils/cache-loaders/redis-loader"));
 const { generateToken } = require("../utils/utils");
 const bcrypt = require("bcryptjs");
@@ -35,7 +35,7 @@ const registerUser = (0, express_async_handler_1.default)(async (req, res) => {
     await redis_loader_1.default.expire(temporaryUserKey, 60 * 100);
     const url = `http://localhost:3003/verify-email?reference=${reference}`;
     const emailData = {
-        content: (0, email_template_1.default)(fullname, url),
+        content: (0, email_verification_1.default)(fullname, url),
         to: email,
         subject: "Techy_Jo Registration Confirmation",
     };

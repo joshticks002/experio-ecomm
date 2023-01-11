@@ -1,5 +1,7 @@
-const emailMessage = (username: string, url: string) => {
-  const message = `<!DOCTYPE html >
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const emailMessage = (username, url) => {
+    const message = `<!DOCTYPE html >
         <html>
 
         <head>
@@ -165,7 +167,7 @@ const emailMessage = (username: string, url: string) => {
                 <!-- start copy -->
                 <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                    <p style="margin: 0;">If you have any question, kindly contact us at <a href="" target="_blank" style="color: green;">jadeyemo@gmail.com</a></p>
+                    <p style="margin: 0;">If you have any question, kindly contact us at <a href="" target="_blank" style="color: green;">support@techy-jo.com</a></p>
                     </td>
                 </tr>
                 <!-- end copy -->
@@ -196,7 +198,6 @@ const emailMessage = (username: string, url: string) => {
 
         </html>
     `;
-  return message;
+    return message;
 };
-
-export default emailMessage;
+exports.default = emailMessage;
