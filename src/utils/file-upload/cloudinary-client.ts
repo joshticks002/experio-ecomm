@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
-import Config from "./config";
+import Config from "../config";
 
 const {
   CLOUDINARY: { name, key, secret, url },

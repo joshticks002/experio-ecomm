@@ -10,6 +10,7 @@ const bad_request_1 = __importDefault(require("../errors/bad-request"));
 const not_found_1 = __importDefault(require("../errors/not-found"));
 const email_service_1 = __importDefault(require("../services/email.service"));
 const email_verification_1 = __importDefault(require("../utils/template/email-verification"));
+const forgot_password_template_1 = __importDefault(require("../utils/template/forgot-password-template"));
 const redis_loader_1 = __importDefault(require("../utils/cache-loaders/redis-loader"));
 const { generateToken } = require("../utils/utils");
 const bcrypt = require("bcryptjs");
@@ -29,10 +30,10 @@ const registerUser = (0, express_async_handler_1.default)(async (req, res) => {
     req.body.password = hashedPassword;
     delete req.body.confirm_password;
     const reference = (0, uuid_1.v4)();
-    await redis_loader_1.default.set(reference, JSON.stringify(req.body));
-    await redis_loader_1.default.expire(reference, 60 * 100);
-    await redis_loader_1.default.set(temporaryUserKey, "1");
-    await redis_loader_1.default.expire(temporaryUserKey, 60 * 100);
+    redis_loader_1.default.set(reference, JSON.stringify(req.body));
+    redis_loader_1.default.expire(reference, 60 * 100);
+    redis_loader_1.default.set(temporaryUserKey, "1");
+    redis_loader_1.default.expire(temporaryUserKey, 60 * 100);
     const url = `http://localhost:3003/verify-email?reference=${reference}`;
     const emailData = {
         content: (0, email_verification_1.default)(fullname, url),
@@ -58,8 +59,8 @@ const verifyEmail = (0, express_async_handler_1.default)(async (req, res) => {
     const userData = JSON.parse(isReference);
     const temporaryUserKey = `prospective:user:${userData.email}`;
     const user = (await users_model_1.default.create(userData));
-    await redis_loader_1.default.del(temporaryUserKey);
-    await redis_loader_1.default.del(reference);
+    redis_loader_1.default.del(temporaryUserKey);
+    redis_loader_1.default.del(reference);
     res.status(200).json({
         message: "Your account has been successfully verified",
         data: {},
@@ -92,6 +93,50 @@ const handleLogin = (0, express_async_handler_1.default)(async (req, res) => {
         status: true,
     });
 });
+const forgotPassword = (0, express_async_handler_1.default)(async (req, res) => {
+    const { email } = req.body;
+    const user = (await users_model_1.default.findOne({ email }));
+    if (!user) {
+        throw new not_found_1.default("User not found");
+    }
+    const reference = (0, uuid_1.v4)();
+    redis_loader_1.default.set(reference, email);
+    redis_loader_1.default.expire(reference, 60 * 100);
+    const url = `http://localhost:3003/reset-password?reference=${reference}`;
+    const emailData = {
+        content: (0, forgot_password_template_1.default)(user.fullname, url),
+        to: email,
+        subject: "Techy_Jo Password Reset",
+    };
+    await (0, email_service_1.default)(emailData);
+    res.status(200).json({
+        message: "Forgot password link sent",
+        data: {},
+        status: true,
+    });
+});
+const resetPassword = (0, express_async_handler_1.default)(async (req, res) => {
+    const reference = req.query.reference;
+    const { password } = req.body;
+    if (!reference) {
+        throw new bad_request_1.default("Invalid Reference");
+    }
+    const userEmail = (await redis_loader_1.default.get(reference));
+    if (!userEmail) {
+        throw new bad_request_1.default("Link has expired");
+    }
+    const user = (await users_model_1.default.findOne({ email: userEmail }));
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    user.password = hashedPassword;
+    await users_model_1.default.update({ id: user.id }, user);
+    redis_loader_1.default.del(reference);
+    res.status(200).json({
+        message: "Password reset successful",
+        data: {},
+        status: true,
+    });
+});
 const handleLogout = (0, express_async_handler_1.default)(async (req, res) => {
     const { email } = res.locals.payload;
     const blacklistedTokenKey = `token:blacklist:${email}`;
@@ -106,5 +151,7 @@ module.exports = {
     registerUser,
     verifyEmail,
     handleLogin,
+    forgotPassword,
+    resetPassword,
     handleLogout,
 };

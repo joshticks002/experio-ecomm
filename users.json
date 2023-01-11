@@ -37,7 +37,7 @@
   },
   {
     "id": 5,
-    "fullname": "Adeyemo Joshua",
+    "fullname": "Lurke Joshua",
     "email": "jadeyemo0032@gmail.com",
     "password": "$2a$10$JasrMQJAmH.Lr4wz/8TRS.tftijvKYFRBxOTffgD2ai5n4NgCSEUe",
     "gender": "male",
@@ -47,10 +47,28 @@
   {
     "id": 6,
     "fullname": "Adeyemo Joel",
-    "email": "jadeyemo002@gmail.com",
+    "email": "jasygumo002@gmail.com",
     "password": "$2a$10$p0Hs8DLn6leDROpgvpf4pORcyX8XE00B2aRlq1Pc2kZDd8svd.y8q",
     "gender": "male",
-    "phone": "+2348169833589",
+    "phone": "+2348023415643",
     "address": "No 2 olaosebikan close, second bowen gate"
+  },
+  {
+    "id": 7,
+    "fullname": "Bullion Mark",
+    "email": "bullion.mark@gmail.com",
+    "password": "$2a$10$qlPJIH4BkHyBi/UFlzLOr.Gz75gQ1eOJpNMpPhyP4R9e0/70aERPu",
+    "gender": "male",
+    "phone": "+2347062345623",
+    "address": "No 2 olaosebikan close, second bowen gate"
+  },
+  {
+    "id": 8,
+    "fullname": "Carter Luke",
+    "email": "jadeyemo002@gmail.com",
+    "password": "$2a$10$FReITON91qdrOkjLNDflSe7c9BPOPmKFzfLgb403o1zpElX3VSKf.",
+    "gender": "male",
+    "phone": "+2348032896453",
+    "address": "Sangotedo, Lagos"
   }
 ]
