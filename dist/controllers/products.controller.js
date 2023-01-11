@@ -41,19 +41,31 @@ exports.getProducts = (0, express_async_handler_1.default)(async (req, res) => {
         });
     });
 });
-exports.getProductById = (0, express_async_handler_1.default)(async (req, res) => {
-    const product = (await products_model_1.default.findOne({
-        id: Number(req.params.id),
-    }));
-    if (!product) {
-        throw new bad_request_1.default("Product not found");
-    }
-    res.status(200).json({
-        message: "Product retrieved",
-        data: {
-            product,
-        },
-        status: true,
+exports.getProductById = (0, express_async_handler_1.default)(async (req, res, next) => {
+    const { id } = req.params;
+    let productData;
+    redis_connect_1.default.get(`products:${id}`, async (error, product) => {
+        if (error)
+            console.error(error);
+        if (product != null) {
+            productData = JSON.parse(product);
+        }
+        else {
+            productData = (await products_model_1.default.findOne({
+                id: Number(req.params.id),
+            }));
+            if (!productData) {
+                return next(new bad_request_1.default("Product not found"));
+            }
+            redis_connect_1.default.setex(`products:${id}`, 36000, JSON.stringify(productData));
+        }
+        res.status(200).json({
+            message: "Product retrieved",
+            data: {
+                product: productData,
+            },
+            status: true,
+        });
     });
 });
 exports.updateProductById = (0, express_async_handler_1.default)(async (req, res) => {
@@ -64,7 +76,8 @@ exports.updateProductById = (0, express_async_handler_1.default)(async (req, res
     }
     req.body.price = `N${req.body.price}`;
     const updatedProduct = (await products_model_1.default.update({ id }, { id, ...req.body }));
-    redis_connect_1.default.del("products");
+    redis_connect_1.default.del(`products:${id}`);
+    redis_connect_1.default.setex(`products:${id}`, 36000, JSON.stringify(updatedProduct));
     res.status(200).json({
         message: `Product with id ${id} updated successfully`,
         data: {
@@ -81,6 +94,7 @@ exports.deleteProductById = (0, express_async_handler_1.default)(async (req, res
     }
     await products_model_1.default.remove({ id });
     redis_connect_1.default.del("products");
+    redis_connect_1.default.del(`products:${id}`);
     res.status(200).json({
         message: `Product with id ${id} deleted successfully`,
         data: {},

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import productModel from "../models/products.model";
 import BadRequestError from "../errors/bad-request";
@@ -47,21 +47,34 @@ export const getProducts = expressAsyncHandler(
 );
 
 export const getProductById = expressAsyncHandler(
-  async (req: Request, res: Response) => {
-    const product = (await productModel.findOne({
-      id: Number(req.params.id),
-    })) as IProducts;
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    let productData: Promise<any> | IProducts;
 
-    if (!product) {
-      throw new BadRequestError("Product not found");
-    }
+    redisClient.get(`products:${id}`, async (error: any, product: string) => {
+      if (error) console.error(error);
 
-    res.status(200).json({
-      message: "Product retrieved",
-      data: {
-        product,
-      },
-      status: true,
+      if (product != null) {
+        productData = JSON.parse(product);
+      } else {
+        productData = (await productModel.findOne({
+          id: Number(req.params.id),
+        })) as IProducts;
+
+        if (!productData) {
+          return next(new BadRequestError("Product not found"));
+        }
+
+        redisClient.setex(`products:${id}`, 36000, JSON.stringify(productData));
+      }
+
+      res.status(200).json({
+        message: "Product retrieved",
+        data: {
+          product: productData,
+        },
+        status: true,
+      });
     });
   }
 );
@@ -81,7 +94,8 @@ export const updateProductById = expressAsyncHandler(
       { id, ...req.body }
     )) as IProducts;
 
-    redisClient.del("products");
+    redisClient.del(`products:${id}`);
+    redisClient.setex(`products:${id}`, 36000, JSON.stringify(updatedProduct));
 
     res.status(200).json({
       message: `Product with id ${id} updated successfully`,
@@ -104,6 +118,7 @@ export const deleteProductById = expressAsyncHandler(
 
     await productModel.remove({ id });
     redisClient.del("products");
+    redisClient.del(`products:${id}`);
 
     res.status(200).json({
       message: `Product with id ${id} deleted successfully`,
