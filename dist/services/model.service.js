@@ -6,16 +6,39 @@ class ModelService {
         this.Model = model;
         this.Path = path;
     }
-    async find() {
+    async find(query, page) {
         return new Promise((resolve, reject) => {
-            resolve(this.Model);
+            let name = "";
+            const keys = Object.keys(query);
+            if (!keys.length)
+                resolve(this.Model.slice(page.startIndex, page.endIndex));
+            let arr = this.Model;
+            for (const key of keys) {
+                if (key !== "name" && key !== "rating") {
+                    arr = arr.filter((prod) => prod[key].toLocaleLowerCase() == query[key].toLocaleLowerCase());
+                }
+                else if (key === "rating") {
+                    arr = arr.filter((prod) => prod[key] >= Math.floor(Number(query[key])));
+                }
+                else {
+                    name = query[key];
+                }
+            }
+            if (name) {
+                for (const el in arr) {
+                    const productName = arr[el].name;
+                    if (!productName.includes(name))
+                        arr.splice(Number(el), 1);
+                }
+            }
+            resolve(arr.slice(page.startIndex, page.endIndex));
         });
     }
     async findOne(query) {
         return new Promise((resolve, reject) => {
             const key = Object.keys(query)[0];
             const value = Object.values(query)[0];
-            const response = this.Model.find(data => data[key] === value);
+            const response = this.Model.find((data) => data[key] === value);
             if (response) {
                 resolve(response);
             }
@@ -53,6 +76,11 @@ class ModelService {
             this.Model = this.Model.filter((data) => data.id !== id);
             writeToFile(this.Path, this.Model);
             resolve(true);
+        });
+    }
+    async count() {
+        return new Promise((resolve, reject) => {
+            resolve(this.Model.length);
         });
     }
 }
