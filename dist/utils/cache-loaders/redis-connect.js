@@ -34,9 +34,9 @@ const redisClient = redis.createClient({
     await redisClient.connect();
 })();
 redisClient.on("ready", () => {
-    console.log("Connected!");
+    console.log("Cache Connected!");
 });
 redisClient.on("error", (err) => {
-    console.log("Error in the Connection");
+    console.log("Error in cache Connection");
 });
 exports.default = redisClient;

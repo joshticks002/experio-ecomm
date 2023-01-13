@@ -12,11 +12,11 @@ const redisClient = redis.createClient({
 })();
 
 redisClient.on("ready", () => {
-  console.log("Connected!");
+  console.log("Cache Connected!");
 });
 
 redisClient.on("error", (err: any) => {
-  console.log("Error in the Connection");
+  console.log("Error in cache Connection");
 });
 
 export default redisClient;
