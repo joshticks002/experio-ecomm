@@ -74,11 +74,11 @@ exports.getProducts = (0, express_async_handler_1.default)(async (req, res) => {
         res.status(200).json({
             message: "Desired products retrieved",
             data: {
-                products: productsData,
                 total_products: totalCount,
                 page: queryPage ? Number(queryPage) : 1,
                 per_page: 10,
                 total_pages: totalCount > 10 ? totalCount / 10 : 1,
+                products: productsData,
             },
             status: true,
         });
@@ -142,5 +142,88 @@ exports.deleteProductById = (0, express_async_handler_1.default)(async (req, res
         message: `Product with id ${id} deleted successfully`,
         data: {},
         status: true,
+    });
+});
+const seedProducts = (0, express_async_handler_1.default)(async (req, res) => {
+    const name = [
+        "Spike lon",
+        "Zara sui",
+        "Zamani",
+        "Cleaver Burke",
+        "G-feather",
+        "OP-frendy",
+        "Booster",
+        "Shark tack",
+        "Fenilsy",
+        "Booutr",
+        "Turtle lovers",
+        "Acaton",
+        "Berinweed",
+        "Whale boy",
+        "Snakylu",
+    ];
+    const brand = [
+        "Gucci",
+        "Nike",
+        "Targets",
+        "Vans",
+        "Nintendo",
+        "Gloseir",
+        "CHANEL",
+        "Uniqlo",
+        "crocs",
+        "Adidas",
+        "Tiffany & Co",
+        "PUMA",
+    ];
+    const image = [
+        "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3VpdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1622745473872-9ab4f498d88a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZlbWFsZSUyMGdvd25zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c3Bpa2UlMjBzaG9lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+    ];
+    const rating = 5;
+    const reviews = 500;
+    const price = 400000;
+    const quantity = 50;
+    const category = ["Shoes", "Wears"];
+    const description = [
+        "Best money can afford",
+        "Very nice and comfortable",
+        "Spice your daily look",
+        "Fashion at its peak",
+        "We got you covered",
+        "High quality product",
+        "All to your beauty",
+    ];
+    const storage = [];
+    for (let i = 1; i <= 10000; i++) {
+        const randomName = name[Math.floor(Math.random() * 15)];
+        const randomBrand = brand[Math.floor(Math.random() * 12)];
+        const randomImage = image[Math.floor(Math.random() * 3)];
+        const randomDesc = description[Math.floor(Math.random() * 7)];
+        const randomCategory = category[Math.floor(Math.random() * 2)];
+        const randRating = Math.floor(Math.random() * rating);
+        const randReviews = Math.floor(Math.random() * reviews);
+        const randPrice = Math.floor(Math.random() * price);
+        const randQuantity = Math.floor(Math.random() * quantity);
+        const item = {
+            id: i,
+            name: randomName,
+            image: randomImage,
+            category: randomCategory,
+            brand: randomBrand,
+            description: randomDesc,
+            price: `N${randPrice}`,
+            countInStock: randQuantity,
+            rating: randRating,
+            numReviews: randReviews,
+        };
+        storage.push(item);
+    }
+    await products_model_1.default.create(storage);
+    res.status(201).json({
+        message: "Product seeding Completed",
+        data: [],
+        statusCode: 201,
     });
 });
