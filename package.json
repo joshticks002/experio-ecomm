@@ -2,9 +2,14 @@
     "name": "kosi-ecommerce",
     "version": "0.0.0",
     "private": true,
+    "engines": {
+        "node": ">=v16.14.0",
+        "npm": ">=8.3.1"
+    },
+    "main": "www",
     "scripts": {
-        "devstart": "ts-node-dev --respawn --pretty --transpile-only ./bin/www",
         "start": "node --unhandled-rejections=strict ./bin/www",
+        "devstart": "ts-node-dev --respawn --pretty --transpile-only ./bin/www",
         "serve": "nodemon ./bin/www",
         "postinstall": "tsc",
         "heroku:deploy": "git add . && git commit -m 'Heroku Update' && git push heroku development:main",
