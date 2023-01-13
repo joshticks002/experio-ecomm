@@ -1,9 +1,10 @@
-import Config from "../config";
+import * as dotenv from "dotenv";
 const redis = require("redis");
+dotenv.config();
 
 const redisClient = redis.createClient({
   legacyMode: true,
-  url: Config.redis.productionUrl,
+  url: process.env.REDIS_URL,
 });
 
 (async () => {
