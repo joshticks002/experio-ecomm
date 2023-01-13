@@ -6,9 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Redis = require("redis");
 const config_1 = __importDefault(require("../config"));
 const redisClient = Redis.createClient({
-    legacyMode: true,
+    //   legacyMode: true,
+    url: config_1.default.redis.productionUrl,
     host: config_1.default.redis.productionHost,
     port: config_1.default.redis.productionPort,
+    password: config_1.default.redis.productionPassword,
 });
 redisClient.on("error", (err) => console.error("Redis not connected"));
 redisClient.on("connect", (err) => console.error("Redis connected"));
