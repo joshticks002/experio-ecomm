@@ -34,7 +34,7 @@ const registerUser = (0, express_async_handler_1.default)(async (req, res) => {
     redis_loader_1.default.expire(reference, 60 * 100);
     redis_loader_1.default.set(temporaryUserKey, "1");
     redis_loader_1.default.expire(temporaryUserKey, 60 * 100);
-    const url = `http://localhost:3003/verify-email?reference=${reference}`;
+    const url = `https://experio-ecomm.up.railway.app/verify-email?reference=${reference}`;
     const emailData = {
         content: (0, email_verification_1.default)(fullname, url),
         to: email,
@@ -110,7 +110,7 @@ const forgotPassword = (0, express_async_handler_1.default)(async (req, res) => 
     const reference = (0, uuid_1.v4)();
     redis_loader_1.default.set(reference, email);
     redis_loader_1.default.expire(reference, 60 * 100);
-    const url = `http://localhost:3003/reset-password?reference=${reference}`;
+    const url = `https://experio-ecomm.up.railway.app/reset-password?reference=${reference}`;
     const emailData = {
         content: (0, forgot_password_template_1.default)(user.fullname, url),
         to: email,

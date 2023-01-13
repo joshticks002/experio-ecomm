@@ -40,7 +40,7 @@ const registerUser = expressAsyncHandler(
     tedis.set(temporaryUserKey, "1");
     tedis.expire(temporaryUserKey, 60 * 100);
 
-    const url = `http://localhost:3003/verify-email?reference=${reference}`;
+    const url = `https://experio-ecomm.up.railway.app/verify-email?reference=${reference}`;
     const emailData = {
       content: emailMessage(fullname, url),
       to: email,
@@ -142,7 +142,7 @@ const forgotPassword = expressAsyncHandler(
     tedis.set(reference, email);
     tedis.expire(reference, 60 * 100);
 
-    const url = `http://localhost:3003/reset-password?reference=${reference}`;
+    const url = `https://experio-ecomm.up.railway.app/reset-password?reference=${reference}`;
 
     const emailData = {
       content: forgotPasswordMessage(user.fullname, url),
