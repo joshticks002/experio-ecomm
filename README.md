@@ -6,7 +6,7 @@ An API for user management and products. Features includes authentication, autho
 
 ##
 
-- [API URL](https://ecomm-experio.herokuapp.com/)
+- [API URL](https://experio-ecomm.up.railway.app)
 - [github repo](https://github.com/joshticks002/experio-ecomm)
 
 ## Tech Stack
