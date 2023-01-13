@@ -7,7 +7,11 @@ const Redis = require("redis");
 const config_1 = __importDefault(require("../config"));
 const redisClient = Redis.createClient({
     legacyMode: true,
-    PORT: config_1.default.redis.localPort,
+    socket: {
+        host: config_1.default.redis.productionHost,
+        port: config_1.default.redis.productionPort,
+    },
+    password: config_1.default.redis.productionPassword,
 });
-redisClient.connect().catch(console.error);
+redisClient.connect().catch(console.error, "Redis not connected");
 exports.default = redisClient;

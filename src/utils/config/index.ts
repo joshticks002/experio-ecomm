@@ -34,8 +34,10 @@ interface IConfig {
   redis: {
     port: number;
     host: string;
-    localPort: number;
     password: string;
+    productionHost: string;
+    productionPassword: string;
+    productionPort: number;
   };
 }
 
@@ -66,8 +68,10 @@ const Config: IConfig = {
   redis: {
     host: process.env.REDIS_HOST as string,
     port: Number(process.env.REDIS_PORT) as number,
-    localPort: Number(process.env.REDISPORT) as number,
     password: process.env.REDIS_PASSWORD as string,
+    productionHost: process.env.REDISHOST_PROD as string,
+    productionPort: Number(process.env.REDISPORT) as number,
+    productionPassword: process.env.REDISPASSWORD_PROD as string,
   },
 };
 
