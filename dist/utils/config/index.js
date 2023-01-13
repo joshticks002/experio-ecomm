@@ -53,9 +53,9 @@ const Config = {
         host: process.env.REDIS_HOST,
         port: Number(process.env.REDIS_PORT),
         password: process.env.REDIS_PASSWORD,
-        productionHost: process.env.REDISHOST_PROD,
+        productionHost: process.env.REDISHOST,
         productionPort: Number(process.env.REDISPORT),
-        productionPassword: process.env.REDISPASSWORD_PROD,
+        productionPassword: process.env.REDISPASSWORD,
     },
 };
 exports.default = Config;
