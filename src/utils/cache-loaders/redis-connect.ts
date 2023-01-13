@@ -1,10 +1,7 @@
 import Config from "../config";
 const redis = require("redis");
 
-const redisClient = redis.createClient({
-  HOST: Config.redis.productionHost,
-  PORT: Config.redis.productionPort,
-});
+const redisClient = redis.createClient(7823, "127.0.0.1");
 
 (async () => {
   await redisClient.connect();
