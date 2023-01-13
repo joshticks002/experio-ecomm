@@ -1,10 +1,11 @@
 import express from "express";
-const authRouter = express.Router();
 import validateUserData from "../middleware/validate-user-data";
 import validateLogin from "../middleware/validate-login";
 import validateToken from "../middleware/authentication";
 import validatePassword from "../middleware/validate-password";
 import validateEmail from "../middleware/validate-email";
+
+const authRouter = express.Router();
 
 const {
   registerUser,

@@ -16,6 +16,7 @@ export const addProduct = expressAsyncHandler(
     const lastPage = count / 10 >= 1 ? count : 1;
 
     redisClient.del(`products?page=${lastPage}`);
+    redisClient.del(`products?`);
 
     res.status(201).json({
       message: "Product successfully added",
@@ -53,7 +54,7 @@ export const getProducts = expressAsyncHandler(
     }
 
     if (query.price) {
-      bus.category = query.price;
+      bus.price = query.price;
     }
 
     if (query.rating) {

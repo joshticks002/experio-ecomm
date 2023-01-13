@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const authRouter = express_1.default.Router();
 const validate_user_data_1 = __importDefault(require("../middleware/validate-user-data"));
 const validate_login_1 = __importDefault(require("../middleware/validate-login"));
 const authentication_1 = __importDefault(require("../middleware/authentication"));
 const validate_password_1 = __importDefault(require("../middleware/validate-password"));
 const validate_email_1 = __importDefault(require("../middleware/validate-email"));
+const authRouter = express_1.default.Router();
 const { registerUser, verifyEmail, handleLogin, forgotPassword, resetPassword, handleLogout, } = require("../controllers/auth.controller");
 authRouter.post("/sign-up", validate_user_data_1.default, registerUser);
 authRouter.get("/verify-email", verifyEmail);

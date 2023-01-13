@@ -9,6 +9,7 @@ const validateProductData = expressAsyncHandler(
       brand: Joi.string().required(),
       category: Joi.string().required(),
       description: Joi.string().required(),
+      image: Joi.string(),
       price: Joi.number().min(1).required(),
       countInStock: Joi.number().min(1).required(),
       rating: Joi.number().min(1).max(5).required(),

@@ -110,10 +110,19 @@ const handleLogin = expressAsyncHandler(async (req: Request, res: Response) => {
   const blacklistedTokenKey = `token:blacklist:${email}`;
   redisClient.del(blacklistedTokenKey);
 
+  const { fullname, gender, phone, address } = user;
+
   res.status(200).json({
     message: "User login successful",
     data: {
       token,
+      user: {
+        fullname,
+        email,
+        phone,
+        address,
+        gender,
+      },
     },
     status: true,
   });

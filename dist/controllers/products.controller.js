@@ -17,6 +17,7 @@ exports.addProduct = (0, express_async_handler_1.default)(async (req, res) => {
     ]);
     const lastPage = count / 10 >= 1 ? count : 1;
     redis_connect_1.default.del(`products?page=${lastPage}`);
+    redis_connect_1.default.del(`products?`);
     res.status(201).json({
         message: "Product successfully added",
         data: {
@@ -46,7 +47,7 @@ exports.getProducts = (0, express_async_handler_1.default)(async (req, res) => {
         bus.category = query.category;
     }
     if (query.price) {
-        bus.category = query.price;
+        bus.price = query.price;
     }
     if (query.rating) {
         bus.rating = query.rating;

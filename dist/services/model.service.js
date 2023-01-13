@@ -14,11 +14,14 @@ class ModelService {
                 resolve(this.Model.slice(page.startIndex, page.endIndex));
             let arr = this.Model;
             for (const key of keys) {
-                if (key !== "name" && key !== "rating") {
+                if (key !== "name" && key !== "rating" && key !== "price") {
                     arr = arr.filter((prod) => prod[key].toLocaleLowerCase() == query[key].toLocaleLowerCase());
                 }
                 else if (key === "rating") {
                     arr = arr.filter((prod) => prod[key] >= Math.floor(Number(query[key])));
+                }
+                else if (key === "price") {
+                    arr = arr.filter((prod) => Number(prod[key].split("N")[1]) >= Math.floor(Number(query[key])));
                 }
                 else {
                     name = query[key];

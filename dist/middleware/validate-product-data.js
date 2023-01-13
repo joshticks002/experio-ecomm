@@ -11,6 +11,7 @@ const validateProductData = (0, express_async_handler_1.default)(async (req, res
         brand: joi_1.default.string().required(),
         category: joi_1.default.string().required(),
         description: joi_1.default.string().required(),
+        image: joi_1.default.string(),
         price: joi_1.default.number().min(1).required(),
         countInStock: joi_1.default.number().min(1).required(),
         rating: joi_1.default.number().min(1).max(5).required(),
