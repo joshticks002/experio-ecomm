@@ -94,7 +94,7 @@ export const getProducts = expressAsyncHandler(
             total_products: totalCount,
             page: queryPage ? Number(queryPage) : 1,
             per_page: 10,
-            total_pages: totalCount > 10 ? totalCount / 10 : 1,
+            total_pages: totalCount > 10 ? Math.ceil(totalCount / 10) : 1,
             products: productsData,
           },
           status: true,
