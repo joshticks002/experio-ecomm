@@ -50,10 +50,10 @@ const Config = {
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
     redis: {
-        host: process.env.REDISHOST,
-        port: Number(process.env.REDISPORT),
-        localPort: Number(process.env.REDIS_PRODUCTION),
-        password: process.env.REDISPASSWORD,
+        host: process.env.REDIS_HOST,
+        port: Number(process.env.REDIS_PORT),
+        localPort: Number(process.env.REDISPORT),
+        password: process.env.REDIS_PASSWORD,
     },
 };
 exports.default = Config;

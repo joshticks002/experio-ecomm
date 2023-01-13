@@ -64,10 +64,10 @@ const Config: IConfig = {
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
   },
   redis: {
-    host: process.env.REDISHOST as string,
-    port: Number(process.env.REDISPORT) as number,
-    localPort: Number(process.env.REDIS_PRODUCTION) as number,
-    password: process.env.REDISPASSWORD as string,
+    host: process.env.REDIS_HOST as string,
+    port: Number(process.env.REDIS_PORT) as number,
+    localPort: Number(process.env.REDISPORT) as number,
+    password: process.env.REDIS_PASSWORD as string,
   },
 };
 
