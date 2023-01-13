@@ -1,7 +1,10 @@
 import Config from "../config";
 const redis = require("redis");
 
-const redisClient = redis.createClient(7823, "0.0.0.0");
+const redisClient = redis.createClient(
+  7823,
+  "containers-us-west-196.railway.app"
+);
 
 (async () => {
   await redisClient.connect();
