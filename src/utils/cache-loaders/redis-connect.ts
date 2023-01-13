@@ -2,8 +2,8 @@ import Config from "../config";
 const redis = require("redis");
 
 const redisClient = redis.createClient({
-  url: Config.redis.productionUrl,
-  port: Config.redis.productionPort,
+  HOST: Config.redis.productionHost,
+  PORT: Config.redis.productionPort,
 });
 
 (async () => {
