@@ -30,13 +30,7 @@ const bull_1 = __importDefault(require("bull"));
 const email_process_1 = __importDefault(require("../processes/email.process"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
-const emailQueue = new bull_1.default("email", {
-    redis: process.env.REDIS_URL,
-    limiter: {
-        max: 1000,
-        duration: 5000,
-    },
-});
+const emailQueue = new bull_1.default("email", process.env.REDIS_URL);
 emailQueue.process(email_process_1.default);
 emailQueue.on("completed", (job) => {
     console.log(`Job completed`);

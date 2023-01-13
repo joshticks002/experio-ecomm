@@ -3,13 +3,7 @@ import emailProcess from "../processes/email.process";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const emailQueue = new Bull("email", {
-  redis: process.env.REDIS_URL,
-  limiter: {
-    max: 1000,
-    duration: 5000,
-  },
-});
+const emailQueue = new Bull("email", process.env.REDIS_URL as string);
 
 emailQueue.process(emailProcess);
 emailQueue.on("completed", (job: Job) => {
