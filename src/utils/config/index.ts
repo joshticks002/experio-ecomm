@@ -66,7 +66,7 @@ const Config: IConfig = {
   redis: {
     host: process.env.REDIS_HOST as string,
     port: Number(process.env.REDIS_PORT) as number,
-    localPort: Number(process.env.REDIS_LOCAL_PORT) as number,
+    localPort: Number(process.env.REDISPORT) as number,
     password: process.env.REDIS_PASSWORD as string,
   },
 };
