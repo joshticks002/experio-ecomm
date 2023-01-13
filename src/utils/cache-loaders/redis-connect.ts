@@ -3,7 +3,10 @@ const redis = require("redis");
 const redisClient = redis.createClient();
 
 (async () => {
-  await redisClient.connect();
+  await redisClient.connect({
+    url: Config.redis.productionUrl,
+    port: Config.redis.productionPort,
+  });
 })();
 
 console.log("Connecting to the Redis");
