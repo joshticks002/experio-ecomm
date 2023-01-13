@@ -11,5 +11,5 @@ const redisClient = Redis.createClient({
 });
 redisClient.on("error", (err) => console.error("Redis not connected"));
 redisClient.connect().catch(console.error);
-redisClient.auth(config_1.default.redis.productionPassword);
+redisClient.auth("default", config_1.default.redis.productionPassword);
 exports.default = redisClient;
