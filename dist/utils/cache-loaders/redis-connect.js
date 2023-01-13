@@ -1,18 +1,15 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Redis = require("redis");
-const config_1 = __importDefault(require("../config"));
-const redisClient = Redis.createClient({
-    //   legacyMode: true,
-    url: config_1.default.redis.productionUrl,
-    host: config_1.default.redis.productionHost,
-    port: config_1.default.redis.productionPort,
-    password: config_1.default.redis.productionPassword,
+const redis = require("redis");
+const redisClient = redis.createClient();
+(async () => {
+    await redisClient.connect();
+})();
+console.log("Connecting to the Redis");
+redisClient.on("ready", () => {
+    console.log("Connected!");
 });
-// redisClient.on("error", (err: any) => console.error("Redis not connected"));
-redisClient.on("connect", (err) => console.error("Redis connected"));
-redisClient.connect().catch(console.error);
+redisClient.on("error", (err) => {
+    console.log("Error in the Connection");
+});
 exports.default = redisClient;

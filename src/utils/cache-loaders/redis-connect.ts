@@ -1,15 +1,19 @@
-const Redis = require("redis");
 import Config from "../config";
+const redis = require("redis");
+const redisClient = redis.createClient();
 
-const redisClient = Redis.createClient({
-  //   legacyMode: true,
-  url: Config.redis.productionUrl,
-  host: Config.redis.productionHost,
-  port: Config.redis.productionPort,
-  password: Config.redis.productionPassword,
+(async () => {
+  await redisClient.connect();
+})();
+
+console.log("Connecting to the Redis");
+
+redisClient.on("ready", () => {
+  console.log("Connected!");
 });
-// redisClient.on("error", (err: any) => console.error("Redis not connected"));
-redisClient.on("connect", (err: any) => console.error("Redis connected"));
-redisClient.connect().catch(console.error);
+
+redisClient.on("error", (err: any) => {
+  console.log("Error in the Connection");
+});
 
 export default redisClient;
