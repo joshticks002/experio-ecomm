@@ -70,7 +70,7 @@ const Config: IConfig = {
     port: Number(process.env.REDIS_PORT) as number,
     password: process.env.REDIS_PASSWORD as string,
     productionHost: process.env.REDISHOST as string,
-    productionPort: Number(process.env.REDISPORT) as number,
+    productionPort: Number(process.env.REDIS_LOCAL_PORT) as number,
     productionPassword: process.env.REDISPASSWORD as string,
   },
 };

@@ -54,7 +54,7 @@ const Config = {
         port: Number(process.env.REDIS_PORT),
         password: process.env.REDIS_PASSWORD,
         productionHost: process.env.REDISHOST,
-        productionPort: Number(process.env.REDISPORT),
+        productionPort: Number(process.env.REDIS_LOCAL_PORT),
         productionPassword: process.env.REDISPASSWORD,
     },
 };
