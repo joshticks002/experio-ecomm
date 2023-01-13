@@ -1,9 +1,10 @@
 import Bull, { Job } from "bull";
 import emailProcess from "../processes/email.process";
-import redisClient from "../../utils/cache-loaders/redis-connect";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const emailQueue = new Bull("email", {
-  redis: redisClient,
+  redis: process.env.REDIS_URL,
   limiter: {
     max: 1000,
     duration: 5000,
