@@ -8,7 +8,7 @@ const redisClient = Redis.createClient({
   port: Config.redis.productionPort,
   password: Config.redis.productionPassword,
 });
-redisClient.on("error", (err: any) => console.error("Redis not connected"));
+// redisClient.on("error", (err: any) => console.error("Redis not connected"));
 redisClient.on("connect", (err: any) => console.error("Redis connected"));
 redisClient.connect().catch(console.error);
 

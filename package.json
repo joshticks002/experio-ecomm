@@ -8,7 +8,7 @@
     },
     "main": "www",
     "scripts": {
-        "start": "railway run & node --unhandled-rejections=strict ./bin/www",
+        "start": "node --unhandled-rejections=strict ./bin/www",
         "devstart": "ts-node-dev --respawn --pretty --transpile-only ./bin/www",
         "serve": "nodemon ./bin/www",
         "postinstall": "tsc",
