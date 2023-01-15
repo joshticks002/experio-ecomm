@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import errorHandler from "./middleware/error-handler";
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -9,6 +9,12 @@ import router from "./routes/index.routes";
 dbService();
 
 const app = express();
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
 
 app.use(logger("dev"));
 app.use(express.json());
