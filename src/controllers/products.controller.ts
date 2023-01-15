@@ -13,7 +13,7 @@ export const addProduct = expressAsyncHandler(
       productModel.create(req.body),
       productModel.count(),
     ]);
-    const lastPage = count / 10 >= 1 ? count : 1;
+    const lastPage = count / 10 >= 1 ? Math.ceil(count / 10) : 1;
 
     redisClient.del(`products?page=${lastPage}`);
     redisClient.del(`products?`);

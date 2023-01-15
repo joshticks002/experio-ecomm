@@ -15,7 +15,7 @@ exports.addProduct = (0, express_async_handler_1.default)(async (req, res) => {
         products_model_1.default.create(req.body),
         products_model_1.default.count(),
     ]);
-    const lastPage = count / 10 >= 1 ? count : 1;
+    const lastPage = count / 10 >= 1 ? Math.ceil(count / 10) : 1;
     redis_connect_1.default.del(`products?page=${lastPage}`);
     redis_connect_1.default.del(`products?`);
     res.status(201).json({
