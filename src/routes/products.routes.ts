@@ -6,9 +6,11 @@ import { validateRequestParameter } from "../middleware/validate-request-data";
 import MoveFile from "../middleware/move-file";
 import multerMemory from "../middleware/upload-file";
 import validateFileUpload from "../middleware/validate-file-upload";
+import validateAdmin from "../middleware/admin-auth";
 
 productRouter.post(
   "/products",
+  validateAdmin,
   multerMemory.single("file"),
   validateProductData,
   MoveFile.awsMoveProfilePicture,
@@ -20,7 +22,7 @@ productRouter
   .route("/products/:id")
   .all(validateRequestParameter)
   .get(Product.getProductById)
-  .put(validateProductData, Product.updateProductById)
-  .delete(Product.deleteProductById);
+  .put(validateAdmin, validateProductData, Product.updateProductById)
+  .delete(validateAdmin, Product.deleteProductById);
 
 export default productRouter;

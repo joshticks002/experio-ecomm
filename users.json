@@ -59,7 +59,8 @@
         "password": "$2a$10$qlPJIH4BkHyBi/UFlzLOr.Gz75gQ1eOJpNMpPhyP4R9e0/70aERPu",
         "gender": "male",
         "phone": "+2347062345623",
-        "address": "No 2 olaosebikan close, second bowen gate"
+        "address": "No 2 olaosebikan close, second bowen gate",
+        "role": "admin"
     },
     {
         "id": 8,
@@ -77,6 +78,7 @@
         "password": "$2a$10$aUgl9p9GUEjnHzwUsei57OISj6BxBp3ucigXCi0mievECEAPC0ZVW",
         "gender": "female",
         "phone": "+2348032896453",
-        "address": "Sangotedo, Lagos"
+        "address": "Sangotedo, Lagos",
+        "role": "admin"
     }
 ]
